@@ -41,6 +41,9 @@ class Polynomial(object):
         self.coefficients = strip(coefficients, 0)
         self.indeterminate = 'x'
 
+    def getZERO(self):
+        return Polynomial([])
+
     def add(self, other):
         newCoefficients = [
             sum(x) for x in zip_longest(self, other, fillvalue=0.)
@@ -96,5 +99,5 @@ class Polynomial(object):
     def __call__(self, *args):
         return self.evaluateAt(args[0])
 
-
 ZERO = Polynomial([])
+

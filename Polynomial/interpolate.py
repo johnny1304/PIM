@@ -1,6 +1,6 @@
-from ExamplesTest.Polynomial import Polynomial
+from Polynomial import Polynomial
 
-zero= Polynomial([])
+Poly= Polynomial([])
 
 f=Polynomial([1,2,3])
 g=Polynomial([-8,17,0,5])
@@ -16,19 +16,33 @@ def interpolate(points):
         raise ValueError("Not all x values are distinct")
 
     terms= [single_term(points, i) for i in range(0,len(points))]
-    return sum(terms,Polynomial.ZERO)
+    print("terms : ",terms)
+    return sum(terms,Poly.getZERO())
 
 def single_term(points, i):
     theTerm = Polynomial([1.])
+    print("here",theTerm)
     xi, yi = points[i]
 
     for j, p in enumerate(points):
         if j==i:
             continue
-
+        print("p:",p)
         xj = p[0]
+
         theTerm = theTerm* Polynomial(
             [-xj / (xi - xj) , 1.0/ (xi -xj)]
         )
 
+
+        print("j",xj)
+        print("i",xi)
+        print(Polynomial(
+            [-xj / (xi - xj) , 1.0/ (xi -xj)]
+        ))
+        print("term ",theTerm)
+        print("yi",Polynomial([yi]))
+
     return theTerm * Polynomial([yi])
+
+print("answer:",interpolate([(5,7),(10,1)]))
